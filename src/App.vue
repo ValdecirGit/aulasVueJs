@@ -1,8 +1,23 @@
 <template>
   <TheHeader v-if="showHeader" />
 
-  <h1 v-bind:class="classVar">Valdecir testando classe  style com v-bind</h1>
+  <h1 v-bind:class="classVar">
+    Valdecir testando classe  style com v-bind
+  </h1>
+  <h2 v-bind:class="{'title2': true, 'title-home': isHome}">
+    VUE 3
+  </h2>
 
+  <p v-bind:class="pClass">
+    orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  </p>
+
+  <p v-bind:style="styleClass">
+
+    orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+  </p>
+
+  
   <div v-show="showName">
     Nome: {{ firstName }} <br>
     Sobrenome: {{ lastName }}
@@ -46,6 +61,9 @@ export default {
 
   data() {
     return {
+      pClass: ['text', 'text-home'] ,
+      styleClass: {color: 'green', backgroundColor: 'black', 'font-size': '30px'},
+      isHome: true,
       classVar: 'title',
       imgAlt: 'foto de Jhon SNow',
       imagemSrc: 'https://via.placeholder.com/150',
@@ -96,9 +114,25 @@ export default {
 
 <style>
 
+.text-home {
+  color:blue;
+}
+.text {
+  size: 80;
+}
 .title {
   size: 20;
   color:blue;
+}
+
+.title2 {
+  size: 20;
+  color:red;
+}
+
+.title-home {
+  size: 50;
+  color:chartreuse
 }
 .todos-item {
     background: blueviolet;
