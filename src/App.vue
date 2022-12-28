@@ -1,64 +1,35 @@
 <template>
   <div>
-    <div>
-      One-way data binding <br>
-      Two-way data binding <br>
-      v-model -->> formulários <br><br>
-    </div>
-
-    <div>
-      <label>Nome:</label><br>
-      <input type="text" v-model="name">
-      <br>
-      {{ name }}
-    </div>
-    <br>
-    <br>
-    <div>
-      <select v-model="sports">
-        <option value="">Escolha</option>
-        <option value="futebol">Futebol</option>
-        <option value="basquete">Basquete</option>
-        <option value="voleibol">Voleibol</option>
-      </select>
-      <br>
-      <br>
-      {{ sports }}
-    </div>
-    <br>
-    <br>
-    <div>
-      <label>NewsLetter</label>
-      <input v-model="newsletter" type="radio" value="Sim">
-      Sim 
-      <input v-model="newsletter" type="radio" value="Nao">
-      Nao
-      <br>
-      <br>
-      {{ newsletter }}
-    </div>
-    <br>
-    <br>
-    <input v-model="contract" 
-         type="checkbox" value="Nao">
-      Aceita nossos termos ...
-      <br>
-      <br>
-      {{ contract }}
-    <br>
-    <br>
-    <div>
-      <label>Marque as cores que vc gosta</label>
-      <br>
-      <input v-model="colors" type="checkbox" value="azul">
-      azul 
-      <input v-model="colors" type="checkbox" value="amarelo">
-      amarelo
-      
-      <br>
-      {{ colors }}
-    </div>
+    <button @click.once="onClick">
+      Enviar
+    </button>
   </div>
+  <br>
+  <br>
+  <div @mouseover="onMouseOver"
+       @mouseout="onMouseOut">
+    MouseOver e MouseOut
+  </div>
+
+  <br>
+  <br>
+
+  <form action="https:/google.com"
+        @submit.prevent="onSubmit">
+
+        <input type="text"
+         @keyup.enter="onKeyUp">
+
+         
+     <button type="submit">
+          Executar
+     </button>
+  </form>  
+
+  <br>
+  <br>
+
+  
 </template>
 
 <script>
@@ -68,12 +39,32 @@ export default {
 
   data() {
     return {
-      name: 'jhos nosw',
-      sports: '',
-      newsletter: 'Nao',
-      contract: true,
-      colors: []
+
     }
+  },
+
+  methods: {
+    onClick($evt) {
+      console.log('clicou no botao', $evt);
+    },
+
+    onMouseOver($evt){
+      console.log('passou mouse em cima', $evt);
+    },
+
+    onMouseOut($evt){
+      console.log('tirou mouse de cima', $evt);
+    },
+    
+    onSubmit($evt) {
+      console.log('Submit', $evt);
+    },
+
+    onKeyUp($evt){
+      console.log('onKeyUp', $evt);
+    }
+    
+
   }
 }
 </script>
