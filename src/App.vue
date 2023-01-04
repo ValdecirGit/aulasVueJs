@@ -1,85 +1,83 @@
 <template>
   <div>
+    <the-header v-if="showHeader"/>
     <h1>Elemento Raiz do DOM</h1>
-    {{name}}
-  <div>
-    <h2>Cliclo de Vida (life cycle)</h2>
-    <h3>Criação</h3> 
-    <h5>Prepara o componente, faz ajax, inicializa variáveis. Não tem acesso ao template (DOM)</h5> 
-    <h3>Montagem</h3> 
-    <h5>Quando vc precisa inicializar uma lib externa (ex: new Lib()) e ela precisa de acesso ao template (DOM)
-        Tem Acesso ao template (DOM)
-    </h5> 
-    <h3>Atualização</h3> 
-    <h5>Usado para debug. Tudo o que acontece no Vue</h5> 
-    <h3>Desmonstagem</h3> 
-    <h5>Desmonsta o componente. Remove tudo o que for necessário para liberar memória.
-        Ex. Lib->destroy()
-    </h5> 
-    <h3>Hooks</h3> 
-    <h4>Usando para interagir em todas estas fases.</h4>
-    <h5>beforeCreate(){} --> antes do componente ser criado</h5>
-    <h5>created(){} ---> componente foi criado</h5>
-    <h5>beforeMount(){} --->antes do componente ser montado</h5>
-    <h5>mounted(){} --->componente foi montado</h5>
-    <h5>beforeUnmount(){} --->antes do componente ser desmontado</h5>
-    <h5>unmounted(){} --->componente desmontado</h5>
-  
-    <br />
-    <br />
-  </div>
+    {{name}} 
+    <br>
+    <br>
+    <button @click="showHeader = !showHeader">
+      Ativar e desativar Header</button>
+    <br>
+    <br>
+    <input v-model="name" type="text" />
+
 </div>
 </template>
 
 <script>
+import TheHeader from './components/TheHeader.vue';
 
 export default {
   name: "App",
 
   data() {
     return {
-      name: "Valdecir RML"
+      name: "Valdecir RML",
+      showHeader: false
     }
   },
 
-  //antes do componente ser criado
-  beforeCreate(){
-    console.log('beforeCreate');
-    console.log('estado:', this.name);
-    console.log('DOM:', this.$el);
-  },
 
-  //componente foi criado
-  created(){
-    console.log('created');
-    console.log('estado:', this.name);
-    console.log('DOM:', this.$el);
-  },
+// // mais usado para DEBUG  
+// //antes da atualizacao do componente
+// beforeUpdate() {
+//   console.log('beforeUpdate', this.name);
+// },
 
-  //antes do componente ser montado
-  beforeMount(){
-    console.log('beforeMount');
-    console.log('estado:', this.name);
-    console.log('DOM:', this.$el);
-  },
-  // componente foi montado
-  mounted(){
-    console.log('mounted');
-    console.log('estado:', this.name);
-    console.log('DOM:', this.$el);
-  },
-  //antes do componente ser desmontado
-  beforeUnmount(){
-    console.log('beforeUnmount');
-  },
+// // mais usado para DEBUG  
+// //Atualizacao do componente
+// updated() {
+//   console.log('update', this.name);
+// },
 
-  // componente desmontado</h5>
-  unmounted(){
-    console.log('unmounted');
-  },
+  // //antes do componente ser criado
+  // beforeCreate(){
+  //   console.log('beforeCreate');
+  //   console.log('estado:', this.name);
+  //   console.log('DOM:', this.$el);
+  // },
 
+  // //componente foi criado
+  // created(){
+  //   console.log('created');
+  //   console.log('estado:', this.name);
+  //   console.log('DOM:', this.$el);
+  // },
+
+  // //antes do componente ser montado
+  // beforeMount(){
+  //   console.log('beforeMount');
+  //   console.log('estado:', this.name);
+  //   console.log('DOM:', this.$el);
+  // },
+  // // componente foi montado
+  // mounted(){
+  //   console.log('mounted');
+  //   console.log('estado:', this.name);
+  //   console.log('DOM:', this.$el);
+  // },
+  // //antes do componente ser desmontado
+  // beforeUnmount(){
+  //   console.log('beforeUnmount');
+  // },
+
+  // // componente desmontado</h5>
+  // unmounted(){
+  //   console.log('unmounted');
+  // },
 
   components: {
+    TheHeader
     
 
   },
