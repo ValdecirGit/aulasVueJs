@@ -1,42 +1,30 @@
 <template>
   <div>
-    {{ user.first_name }} {{ user.last_name }} <br />
-    computed properties <br />
-    Propriedades Computadas
-    <br /><br />
-
-    <button @click="OnClick">captura instancia do componente</button>
+    <h2>Observadores</h2>
     <br />
     <br />
+    Name:
+    <input v-model="name" type="text"/>
+    <br />
+    {{name}}
     <br />
     <br />
-    <br />
-    <button @click="OnClickUser">acessa propriedades do usuario</button>
-
-    <br />
+    Nome:
+    <input v-model="user.first_name" type="text"/>
     <br />
     <br />
-    {{ fullName }}
+    Sobre:
+    <input v-model="user.last_name" type="text"/>
     <br />
+    {{user.first_name}} {{user.last_name}}
     <br />
+    <select v-model="pageCount">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
     <br />
-    <h2>Todos em aberto</h2>
-    <div v-for="todo in uncompletedTodos" 
-        :key="todo.id">
-      {{ todo.title }}
-    </div>
-    <h2>Todos Completas</h2>
-    <div v-for="todo in completedTodos" 
-        :key="todo.id">
-      {{ todo.title }}
-    </div>
-    <h2>Todos</h2>
-    <div v-for="todo in todos" 
-        :key="todo.id">
-        <input type="checkbox"
-          v-model="todo.completed">
-      {{ todo.title }}
-    </div>
+    {{pageCount}}
   </div>
 </template>
 
@@ -46,65 +34,57 @@ export default {
 
   data() {
     return {
+      name: '',
+      pageCount: '5',
       user: {
-        first_name: "Valdecir",
-        last_name: "Ribeiro de Melo",
-      },
-
-      todos: [
-        {
-          userId: 1,
-          id: 1,
-          title: "delectus aut autem",
-          completed: false,
-        },
-        {
-          userId: 1,
-          id: 2,
-          title: "quis ut nam facilis et officia qui",
-          completed: false,
-        },
-        {
-          userId: 1,
-          id: 3,
-          title: "fugiat veniam minus",
-          completed: false,
-        },
-        {
-          userId: 1,
-          id: 4,
-          title: "et porro tempora",
-          completed: true,
-        },
-      ],
-    };
+        first_name: '',
+        last_name: '',
+      }
+    }
   },
 
-  components: {},
+  components: {
+
+  },
+
+  watch: {
+    name(vlr){
+      // só executa rotina que valor tiver 3 ou mais caracteres
+      if (vlr.length >= 3) {
+      this.saveUserName();
+      }
+    },
+        pageCount(){
+      this.changePage();  
+    },
+
+    /* funçãoooooooooooooooooo
+    user(){
+     console.log('usuario alterado')
+    } */
+
+    // objetoooooooooooooooo
+    user: {
+       handler(){
+        console.log('usuario alterado disparo handler')
+       },
+       deep: true
+    }
+  },
 
   computed: {
-    fullName() {
-      return `${this.user.first_name} ${this.user.last_name}`;
-    },
-
-    uncompletedTodos() {
-      // retorna valores do array somente que forem diferentes de completed
-      return this.todos.filter(todo => !todo.completed);
-    },
-    completedTodos() {
-      // retorna valores do array somente que forem diferentes de completed
-      return this.todos.filter(todo => todo.completed);
-    },
 
   },
 
   methods: {
-    OnClick($evt) {
-      console.log(this, $evt);
+    saveUserName(){
+      console.log('ajax saveUserName');
+      console.log(this.name);
     },
-    OnClickUser($evt) {
-      console.log(this.user, $evt);
-    },
+    changePage(){
+      console.log('ajax changePage');
+      console.log(this.pageCount);
+    }
   },
 };
 </script>
