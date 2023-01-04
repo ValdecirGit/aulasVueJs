@@ -1,72 +1,112 @@
 <template>
   <div>
-    <button @click.once="onClick">
-      Enviar
-    </button>
+    {{ user.first_name }} {{ user.last_name }} <br />
+    computed properties <br />
+    Propriedades Computadas
+    <br /><br />
+
+    <button @click="OnClick">captura instancia do componente</button>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <button @click="OnClickUser">acessa propriedades do usuario</button>
+
+    <br />
+    <br />
+    <br />
+    {{ fullName }}
+    <br />
+    <br />
+    <br />
+    <h2>Todos em aberto</h2>
+    <div v-for="todo in uncompletedTodos" 
+        :key="todo.id">
+      {{ todo.title }}
+    </div>
+    <h2>Todos Completas</h2>
+    <div v-for="todo in completedTodos" 
+        :key="todo.id">
+      {{ todo.title }}
+    </div>
+    <h2>Todos</h2>
+    <div v-for="todo in todos" 
+        :key="todo.id">
+        <input type="checkbox"
+          v-model="todo.completed">
+      {{ todo.title }}
+    </div>
   </div>
-  <br>
-  <br>
-  <div @mouseover="onMouseOver"
-       @mouseout="onMouseOut">
-    MouseOver e MouseOut
-  </div>
-
-  <br>
-  <br>
-
-  <form action="https:/google.com"
-        @submit.prevent="onSubmit">
-
-        <input type="text"
-         @keyup.enter="onKeyUp">
-
-         
-     <button type="submit">
-          Executar
-     </button>
-  </form>  
-
-  <br>
-  <br>
-
-  
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 
   data() {
     return {
+      user: {
+        first_name: "Valdecir",
+        last_name: "Ribeiro de Melo",
+      },
 
-    }
+      todos: [
+        {
+          userId: 1,
+          id: 1,
+          title: "delectus aut autem",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 2,
+          title: "quis ut nam facilis et officia qui",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 3,
+          title: "fugiat veniam minus",
+          completed: false,
+        },
+        {
+          userId: 1,
+          id: 4,
+          title: "et porro tempora",
+          completed: true,
+        },
+      ],
+    };
+  },
+
+  components: {},
+
+  computed: {
+    fullName() {
+      return `${this.user.first_name} ${this.user.last_name}`;
+    },
+
+    uncompletedTodos() {
+      // retorna valores do array somente que forem diferentes de completed
+      return this.todos.filter(todo => !todo.completed);
+    },
+    completedTodos() {
+      // retorna valores do array somente que forem diferentes de completed
+      return this.todos.filter(todo => todo.completed);
+    },
+
   },
 
   methods: {
-    onClick($evt) {
-      console.log('clicou no botao', $evt);
+    OnClick($evt) {
+      console.log(this, $evt);
     },
-
-    onMouseOver($evt){
-      console.log('passou mouse em cima', $evt);
+    OnClickUser($evt) {
+      console.log(this.user, $evt);
     },
-
-    onMouseOut($evt){
-      console.log('tirou mouse de cima', $evt);
-    },
-    
-    onSubmit($evt) {
-      console.log('Submit', $evt);
-    },
-
-    onKeyUp($evt){
-      console.log('onKeyUp', $evt);
-    }
-    
-
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -77,6 +117,5 @@ export default {
   text-align: left;
   color: #2c3e50;
   margin-top: 60px;
-
 }
 </style>

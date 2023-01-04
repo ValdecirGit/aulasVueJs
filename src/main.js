@@ -6,4 +6,6 @@ import App from './App.vue'
 // Vue.use(Vuetify)
 // import 'vuetify/dist/vuetify.min.css'
 
-createApp(App).mount('#app')
+// createApp(App).mount('#app')
+
+window.app = createApp(App).mount('#app')
